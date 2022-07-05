@@ -1,5 +1,86 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+body {
+    background-color: darkslategray;
+}
 header {
-    flex-wrap: wrap;
     display: flex;
     justify-content: space-between;
+    background-color: aqua;
+    padding: 10px;
+    font-size: 24px;
+}
+header a {
+    text-decoration: none;
+    color: black;
+}
+main {
+    display: flex;
+    justify-content: center;
+}
+
+.game-container{
+   width: 33%;
+   background-color: aliceblue;
+   margin-top: 20px;
+   border: 5px black solid;
+   padding: 10px;
+}
+.qa-container {
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    justify-content: center;
+    
+}
+.question {
+    flex-basis: 100%;
+    text-align: left;
+    padding-left: 10px;
+    font-weight: bold;
+}
+.answers {
+    display: flex;
+    flex-wrap: wrap;
+    flex-basis: 100%;
+    text-align: left;
+}
+.btn {
+    flex-basis: 100%;
+    text-align: left;
+    margin: 5px;
+    padding: 5px;
+}
+.btn:hover {
+    background-color: aqua;
+}
+.start-container {
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    justify-content: center;
+}
+.start-info {
+    margin-bottom: 5px;
+}
+.start-btn {
+    flex-basis: 50%;
+}
+.answer-message {
+    text-align: center;
+    margin-top: 10px;
+    border-top: 2px solid black;
+    padding-top: 5px;
+}
+.correct {
+    background-color: green;
+}
+.incorrect {
+    background-color: red;
+}
+.hide {
+    display: none;
 }

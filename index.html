@@ -4,21 +4,41 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylecheet" href="./assets/css/style.css"/>
+    <link rel="stylesheet" href="./assets/css/style.css"/>
+    <script defer src="./assets/js/script.js"></script>
     <title>JavaScript Quiz Game</title>
 </head>
 <body>
     <header>
         <div class="hs-link">
-            <a href="highscore.html">View High Scores</a>
+            <a href="">View High Scores</a>
         </div>
         <div class="title">
             <h1>JavaScript Quiz Game</h1>
         </div>
         <div class="timer" id="timer">
-            Time:
+            Time Remaining:
         </div>
     </header>
-    
+    <main>
+        <div class="game-container">   
+            <div class="qa-container hide" id="qa-container">
+                <div class="question" id="question">Question goes here</div>
+                <div class="answers" id="answers">
+                    <button class="btn">Answer 1</button>
+                    <button class="btn">Answer 2</button>
+                    <button class="btn">Answer 3</button>
+                    <button class="btn">Answer 4</button>
+                </div>
+            </div>
+            <div class="start-container" id="start-container">    
+                <div class="start-info">
+                    You will have 90 seconds to answer 5 questions related to the basics of JavaScript.  Each incorrect answer will result in the loss of 15 seconds.  At the end you can log the remaining time to the high scores list. Timer will begin once you click the start button below.  Good Luck!
+                </div>
+                <button class="start-btn" id="start-btn">Start</button>
+            </div>
+            <div class="answer-message hide" id="answer-message"></div>
+        </div> 
+    </main>
 </body>
 </html>
