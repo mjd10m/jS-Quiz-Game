@@ -4,8 +4,12 @@ const questionAnswerContainerE1 = document.getElementById('qa-container')
 let shuffledQuestionsArray, currentQuestion
 const questionE1 = document.getElementById('question')
 const answerE1 = document.getElementById('answers')
+const startingTimeSeconds = 90;
+let currentTime = startingTimeSeconds
+const timerE1 = document.getElementById('timer')
 
 startButtonE1.addEventListener("click", startGame)
+
 
 
 function startGame() {
@@ -14,6 +18,7 @@ function startGame() {
     shuffledQuestionsArray = questions.sort(()=> Math.random() - .5)
     currentQuestion = 0
     questionAnswerContainerE1.classList.remove('hide')
+    setInterval(updateTimer, 1000);
     setNextQuestion()
 
 }
@@ -74,6 +79,13 @@ function resetquestion() {
     while (answerE1.firstChild) {
         answerE1.removeChild(answerE1.firstChild);
     }
+}
+
+function updateTimer() {
+    const minutes = Math.floor(currentTime / 60);
+    let seconds = currentTime % 60;
+    timerE1.innerHTML = "Time Remaing:" + minutes + ": " + seconds;
+    currentTime--;
 }
 
 const questions = [
