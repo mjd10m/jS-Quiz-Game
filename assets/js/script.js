@@ -7,6 +7,9 @@ const answerE1 = document.getElementById('answers')
 const startingTimeSeconds = 90;
 let currentTime = startingTimeSeconds
 const timerE1 = document.getElementById('timer')
+let paused = false
+
+
 
 startButtonE1.addEventListener("click", startGame)
 
@@ -51,7 +54,7 @@ function selectAnswer(event) {
         currentQuestion++
         setNextQuestion()
     } else {
-        console.log('gameover')
+        return paused = true
     }
 
 }
@@ -71,6 +74,7 @@ function isAnswerCorrect(selectedAnswerButton, correct) {
         answerMessage.innerText = 'Incorrect'
         answerMessage.classList.remove('hide')
         selectedAnswerButton.classList.add('incorrect')
+        currentTime = currentTime - 15
     }
 }
 
@@ -82,10 +86,16 @@ function resetquestion() {
 }
 
 function updateTimer() {
+    if(!paused){
     const minutes = Math.floor(currentTime / 60);
     let seconds = currentTime % 60;
-    timerE1.innerHTML = "Time Remaing:" + minutes + ": " + seconds;
+    if (seconds < 10){
+        timerE1.innerHTML = "Time Remaing: " + minutes + ": " + "0" + seconds;
+    } else {
+        timerE1.innerHTML = "Time Remaing: " + minutes + ": " + seconds;
+    }
     currentTime--;
+    }
 }
 
 const questions = [
