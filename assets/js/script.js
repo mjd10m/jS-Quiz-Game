@@ -7,8 +7,8 @@ const answerE1 = document.getElementById('answers')
 const startingTimeSeconds = 90;
 let currentTime = startingTimeSeconds
 const timerE1 = document.getElementById('timer')
-let paused = false
-
+let timerPaused = true
+var timer = setInterval(updateTimer, 1000);
 
 
 startButtonE1.addEventListener("click", startGame)
@@ -21,14 +21,22 @@ function startGame() {
     shuffledQuestionsArray = questions.sort(()=> Math.random() - .5)
     currentQuestion = 0
     questionAnswerContainerE1.classList.remove('hide')
-    setInterval(updateTimer, 1000);
+    timerE1.classList.remove('hide')
     setNextQuestion()
 
 }
 
 function setNextQuestion() {
-    resetquestion();
-    displayQuestion(shuffledQuestionsArray[currentQuestion]);
+    if (currentQuestion === 0){
+        timerPaused = false;
+        resetquestion();
+        displayQuestion(shuffledQuestionsArray[currentQuestion]);
+    } else {
+        resetAnswerMessage();
+        timerPaused = false;
+        resetquestion();
+        displayQuestion(shuffledQuestionsArray[currentQuestion]);
+    } 
 }
 
 function displayQuestion(question) {
@@ -48,13 +56,14 @@ function displayQuestion(question) {
 function selectAnswer(event) {
     const selectedAnswerButton = event.target
     //const correctAnswer = selectedAnswerButton.dataset.correct
-
     isAnswerCorrect(selectedAnswerButton, selectedAnswerButton.dataset.correct)
     if (shuffledQuestionsArray.length > currentQuestion + 1) {
         currentQuestion++
-        setNextQuestion()
+        setTimeout(setNextQuestion, 3000)
     } else {
-        return paused = true
+        clearInterval(timer)
+        console.log('gameover')
+        setTimeout(gameOver, 3000)
     }
 
 }
@@ -65,18 +74,27 @@ function isAnswerCorrect(selectedAnswerButton, correct) {
     //answerE1.children.classList.remove('correct')
     //answerE1.childElementCount.classList.remove('incorrect')
     if (correct) {
-        console.log('correct')
+        console.log('correct');
         answerMessage.innerText = "Correct"
         answerMessage.classList.remove('hide')
         selectedAnswerButton.classList.add('correct')
+        timerPaused = true;
     } else {
-        console.log('incorrect')
+        console.log('incorrect');
         answerMessage.innerText = 'Incorrect'
         answerMessage.classList.remove('hide')
         selectedAnswerButton.classList.add('incorrect')
         currentTime = currentTime - 15
+        timerPaused = true;
     }
 }
+
+function resetAnswerMessage () {
+    const updatedAnswerMessage = document.getElementById('answer-message');
+    updatedAnswerMessage.classList.add('hide')
+    timerPaused = false
+}
+
 
 
 function resetquestion() {
@@ -86,16 +104,28 @@ function resetquestion() {
 }
 
 function updateTimer() {
-    if(!paused){
-    const minutes = Math.floor(currentTime / 60);
-    let seconds = currentTime % 60;
-    if (seconds < 10){
-        timerE1.innerHTML = "Time Remaing: " + minutes + ": " + "0" + seconds;
+    if (currentTime >= 0){
+        if(!timerPaused){
+        const minutes = Math.floor(currentTime / 60);
+        let seconds = currentTime % 60;
+        if (seconds < 10){
+            timerE1.innerHTML = "Time Remaing: " + minutes + ": " + "0" + seconds;
+        } else {
+            timerE1.innerHTML = "Time Remaing: " + minutes + ": " + seconds;
+        }
+        currentTime--;
+        }
     } else {
-        timerE1.innerHTML = "Time Remaing: " + minutes + ": " + seconds;
+        console.log('gameover')
+        clearInterval(timer)
+        gamerOver() 
     }
-    currentTime--;
-    }
+
+}
+
+function gameOver() {
+    questionAnswerContainerE1.classList.add('hide')
+    resetAnswerMessage();
 }
 
 const questions = [

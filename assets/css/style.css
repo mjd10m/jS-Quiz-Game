@@ -21,6 +21,20 @@ main {
     display: flex;
     justify-content: center;
 }
+.timer {
+    flex-basis: 33%;
+    text-align: right;
+}
+.hs-link {
+    flex-basis: 33%;
+}
+.title {
+    flex-basis: 33%;
+}
+.title h1 {
+    font-size: 36px;
+    text-align: center;
+}
 
 .game-container{
    width: 33%;
