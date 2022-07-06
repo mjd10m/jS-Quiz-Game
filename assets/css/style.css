@@ -95,6 +95,12 @@ main {
 .incorrect {
     background-color: red;
 }
+.game-over-container {
+    display: inline;
+    flex-wrap: wrap;
+    text-align: center;
+    justify-content: center;
+}
 .hide {
     display: none;
 }
