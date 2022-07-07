@@ -29,26 +29,31 @@
                     <button class="btn">Answer 4</button>
                 </div>
             </div>
-            <div class="start-container hide" id="start-container">    
+            <div class="start-container" id="start-container">    
                 <div class="start-info">
                     You will have 90 seconds to answer 5 questions related to the basics of JavaScript.  Each incorrect answer will result in the loss of 15 seconds.  At the end you can log the remaining time to the high scores list. Timer will begin once you click the start button below.  Good Luck!
                 </div>
                 <button class="start-btn" id="start-btn">Start</button>
             </div>
             <div class="answer-message hide" id="answer-message"></div>
-            <div class="game-over-container">
+            <div class="game-over-container hide" id="game-over-container">
                 <div class="game-over-msg">
-                    <h2>Game Complete!</h2>
+                    <h2 id="game-over-main">Game Complete!</h2>
                 </div>
-                <div class="score">Your score is 25</div>
-                <form class="initials-form">
+                <div class="score" id="score">Your score is 25</div>
+                <form class="initials-form" id="initials-form">
                     <div class="initials-input">
                         <input type="text" name="player-initials" placeholder="Enter your Initials" />
                     </div>
                     <div class="initials-submit">
-                        <button class="submit-btn" id="save-initials">Submit</button>
+                        <button class="submit-btn" id="save-initials-score">Submit</button>   
                     </div>
                 </form>
+                <div class="replay-btns hide" id="replay-btns">
+                    <button class="home" id ="home">Main Menu</button>
+                    <button class="play-again" id="play-again">Play Again</button>
+                    <button class="highscores" id="highscores">High Scores</button>
+                </div>
             </div>
         </div> 
     </main>

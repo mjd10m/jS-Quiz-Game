@@ -9,12 +9,28 @@ let currentTime = startingTimeSeconds
 const timerE1 = document.getElementById('timer')
 let timerPaused = true
 var timer = setInterval(updateTimer, 1000);
+const gameOverContainerE1 = document.getElementById('game-over-container')
+const submitHighScoreE1 = document.getElementById('save-initials-score')
+const playAgainE1 = document.getElementById('play-again');
+const homeE1 = document.getElementById('home');
+const highscoresE1 = document.getElementById('highscores');
+var scoreE1 = document.getElementById('score');
+const initialsSubmissionBoxE1 = document.getElementById('initials-form');
+const replayBtns = document.getElementById('replay-btns');
+var highscores = {
+    initials: '',
+    score: ''
+}
 
 
 startButtonE1.addEventListener("click", startGame)
+submitHighScoreE1.addEventListener("click", addScore)
+playAgainE1.addEventListener("click", restartGame)
+homeE1.addEventListener("click", returnHome)
 
-
-
+function returnHome() {
+    location.reload()
+}
 function startGame() {
     console.log("Started");
     startContainerE1.classList.add('hide');
@@ -92,7 +108,6 @@ function isAnswerCorrect(selectedAnswerButton, correct) {
 function resetAnswerMessage () {
     const updatedAnswerMessage = document.getElementById('answer-message');
     updatedAnswerMessage.classList.add('hide')
-    timerPaused = false
 }
 
 
@@ -124,10 +139,46 @@ function updateTimer() {
 }
 
 function gameOver() {
-    questionAnswerContainerE1.classList.add('hide')
+    questionAnswerContainerE1.classList.add('hide');
+    timerE1.innerHTML = ''
     resetAnswerMessage();
+    gameOverContainerE1.classList.remove('hide');
+    scoreE1.innerHTML = "Your score is " + currentTime
+
 }
 
+function addScore(event) {
+    event.preventDefault();
+    updateGameOverMessage = document.getElementById('game-over-main')
+    highscores.initials = document.querySelector("input[name='player-initials']").value;
+    highscores.score = currentTime
+    var getHighscores = JSON.parse(localStorage.getItem("scores"));
+    var savedHighscores = []
+    savedHighscores.push(getHighscores)
+    if (getHighscores === null) {
+        localStorage.setItem("scores", JSON.stringify(highscores));
+    } else {
+        savedHighscores.push(highscores);
+        localStorage.setItem("scores", JSON.stringify(savedHighscores));
+    }
+    debugger;
+    replayBtns.classList.remove('hide');
+    updateGameOverMessage.innerHTML = "Your score has been logged"
+    scoreE1.innerHTML = highscores.initials + " - " + highscores.score
+    initialsSubmissionBoxE1.classList.add('hide')
+
+}
+
+function restartGame() {
+    replayBtns.classList.add('hide');
+    gameOverContainerE1.classList.add('hide');
+    currentTime = startingTimeSeconds
+    timerE1.classList.remove('hide')
+    timer = setInterval(updateTimer, 1000);
+    startGame()
+    
+
+}
 const questions = [
     {
         question: 'What is 2 + 2',
