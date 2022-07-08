@@ -30,9 +30,9 @@ submitHighScoreE1.addEventListener("click", addScore);
 playAgainE1.addEventListener("click", restartGame);
 homeE1.addEventListener("click", returnHome);
 
-function returnHome() {
-    location.reload()
-}
+
+
+//starts the game and timer
 function startGame() {
     timerPaused = false;
     console.log("Started");
@@ -45,6 +45,7 @@ function startGame() {
 
 }
 
+//prepares game for the next question
 function setNextQuestion() {
     if (currentQuestion === 0){
         timerPaused = false;
@@ -58,6 +59,7 @@ function setNextQuestion() {
     } 
 }
 
+//build the question and answer
 function displayQuestion(question) {
     questionE1.innerHTML = question.question;
     question.answers.forEach(answer => {
@@ -72,6 +74,7 @@ function displayQuestion(question) {
     })
 }
 
+//identifies which answer the player has chosen
 function selectAnswer(event) {
     const selectedAnswerButton = event.target;
     isAnswerCorrect(selectedAnswerButton, selectedAnswerButton.dataset.correct);
@@ -86,6 +89,7 @@ function selectAnswer(event) {
 
 }
 
+//checks if answer is correct
 function isAnswerCorrect(selectedAnswerButton, correct) {
     const answerMessage = document.getElementById('answer-message');
     if (correct) {
@@ -104,19 +108,20 @@ function isAnswerCorrect(selectedAnswerButton, correct) {
     }
 }
 
+//removes answer message when next question is called
 function resetAnswerMessage () {
     const updatedAnswerMessage = document.getElementById('answer-message');
     updatedAnswerMessage.classList.add('hide');
 }
 
-
-
+//resets question before next question is called
 function resetquestion() {
     while (answerE1.firstChild) {
         answerE1.removeChild(answerE1.firstChild);
     }
 }
 
+//brings user to the end game screen 
 function gameOver() {
     if(currentTime > 0) {
     questionAnswerContainerE1.classList.add('hide');
@@ -138,6 +143,7 @@ function gameOver() {
     }
 }
 
+//adds players score to local storage
 function addScore(event) {
     event.preventDefault();
     highscores.initials = document.querySelector("input[name='player-initials']").value;
@@ -158,6 +164,7 @@ function addScore(event) {
 
 }
 
+//restarts the game from the end game screen
 function restartGame() {
     replayBtns.classList.add('hide');
     initialsSubmissionBoxE1.classList.remove('hide');
@@ -170,6 +177,7 @@ function restartGame() {
 
 }
 
+//updates the game timer allowing it to count down
 function updateTimer() {
     if (currentTime >= 0){
         if(!timerPaused){
@@ -189,10 +197,17 @@ function updateTimer() {
     }
 
 }
-
+//load highscore page
 function loadHsPage() {
     window.location = 'highscores.html'
 }
+
+//returns to the home page
+function returnHome() {
+    location.reload()
+}
+
+//question base
 const questions = [
     {
         question: 'Javascript is an _______ language?',
