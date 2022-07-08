@@ -13,6 +13,13 @@ header {
     padding: 10px;
     font-size: 24px;
 }
+.highscores-header {
+    display: flex;
+    justify-content: center;
+    background-color: aqua;
+    padding: 10px;
+    font-size: 24px;
+}
 header a {
     text-decoration: none;
     color: black;
@@ -49,6 +56,19 @@ main {
     text-align: center;
     justify-content: center;
     
+}
+.highscore-container {
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    justify-content: center;
+}
+.highscore-title {
+    flex-basis: 100%;
+    padding: 10px
+}
+.highscore-content {
+    flex-basis: 100%;
 }
 .question {
     flex-basis: 100%;
