@@ -18,12 +18,13 @@ var scoreE1 = document.getElementById('score');
 const initialsSubmissionBoxE1 = document.getElementById('initials-form');
 const replayBtns = document.getElementById('replay-btns');
 const updateGameOverMessage = document.getElementById('game-over-main')
+const highscoreBtnE1 = document.getElementById('highscores')
 var highscores = {
     initials: '',
     score: ''
 }
 
-
+highscoreBtnE1.addEventListener("click", loadHsPage)
 startButtonE1.addEventListener("click", startGame)
 submitHighScoreE1.addEventListener("click", addScore)
 playAgainE1.addEventListener("click", restartGame)
@@ -97,11 +98,11 @@ function selectAnswer(event) {
     isAnswerCorrect(selectedAnswerButton, selectedAnswerButton.dataset.correct)
     if (shuffledQuestionsArray.length > currentQuestion + 1) {
         currentQuestion++
-        setTimeout(setNextQuestion, 3000)
+        setTimeout(setNextQuestion, 1500)
     } else {
         clearInterval(timer)
         console.log('gameover')
-        setTimeout(gameOver, 3000)
+        setTimeout(gameOver, 1500)
     }
 
 }
@@ -155,14 +156,14 @@ function addScore(event) {
     event.preventDefault();
     highscores.initials = document.querySelector("input[name='player-initials']").value;
     highscores.score = currentTime
-    var getHighscores = JSON.parse(localStorage.getItem("scores"));
-    var savedHighscores = []
-    savedHighscores.push(getHighscores)
-    if (getHighscores === null) {
-        localStorage.setItem("scores", JSON.stringify(highscores));
+    var currentHighscores = JSON.parse(localStorage.getItem("scores"));
+    if (currentHighscores === null) {
+        var newHighscore = []
+        newHighscore.push(highscores)
+        localStorage.setItem("scores", JSON.stringify(newHighscore));
     } else {
-        savedHighscores.push(highscores);
-        localStorage.setItem("scores", JSON.stringify(savedHighscores));
+        currentHighscores.push(highscores)
+        localStorage.setItem("scores", JSON.stringify(currentHighscores));
     }
     replayBtns.classList.remove('hide');
     updateGameOverMessage.innerHTML = "Your score has been logged"
@@ -183,7 +184,9 @@ function restartGame() {
 
 }
 
-
+function loadHsPage() {
+    window.location = 'highscores.html'
+}
 const questions = [
     {
         question: 'What is 2 + 2',
